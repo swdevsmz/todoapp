@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import todoapp.dao.TodoDAO;
-import todoapp.model.Todo;
+import todoapp.dao.todo.TodoDAO;
+import todoapp.model.todo.Todo;
 
 /**
  * Servlet implementation class Create
@@ -31,7 +31,7 @@ public class CreateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/create.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/create.jsp");
 		rd.forward(request, response);
 	}
 
@@ -40,11 +40,11 @@ public class CreateController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String title=request.getParameter("title");
-		String importance=request.getParameter("importance");
-		Todo todo=new Todo(title,Integer.parseInt(importance));
-		TodoDAO dao=new TodoDAO();
-		dao.insertOne(todo);
+		String title = request.getParameter("title");
+		String importance = request.getParameter("importance");
+		Todo todo = new Todo(title,Integer.parseInt(importance));
+		TodoDAO dao = new TodoDAO();
+		dao.insert(todo);
 
 		response.sendRedirect("/todoapp/Read");
 	}

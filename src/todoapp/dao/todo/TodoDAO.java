@@ -1,4 +1,4 @@
-package todoapp.dao;
+package todoapp.dao.todo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,21 +11,15 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import todoapp.model.Todo;
+import todoapp.model.todo.Todo;
 
 public class TodoDAO {
-	private Connection db; //todoappデータベースに接続されたコネクション
-	private PreparedStatement ps; //sql文を保持する変数
-	private ResultSet rs; //結果セット(SQL文を実行した結果の集合)を保持
+	private Connection db;        // todoappデータベースに接続されたコネクション
+	private PreparedStatement ps; // sql文を保持する変数
+	private ResultSet rs;         // 結果セット(SQL文を実行した結果の集合)を保持
 
 	//接続処理
 	private void connect() throws NamingException, SQLException {
-
-//	    InitialContext ctx;
-//	    ctx = new InitialContext();
-//	    DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/tododb");
-
-
 	    InitialContext context = new InitialContext();
 		DataSource ds = (DataSource) context.lookup("java:comp/env/jdbc/tododb");
 		db = ds.getConnection();
@@ -33,7 +27,6 @@ public class TodoDAO {
 
 	//切断処理
 	private void disconnect() {
-
 		try {
 			if (rs != null) {
 				rs.close();
@@ -47,19 +40,19 @@ public class TodoDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
+
 	public List<Todo> findAll(){
 		List<Todo> list=new ArrayList<>();
 		try {
 			this.connect();
-			ps=db.prepareStatement("SELECT * FROM todos ORDER BY importance DESC");
-			rs=ps.executeQuery();
+			ps = db.prepareStatement("SELECT id, title, importance FROM todos ORDER BY importance DESC");
+			rs = ps.executeQuery();
 			while(rs.next()) {
-				int id=rs.getInt("id");
-				String title=rs.getString("title");
-				int importance=rs.getInt("importance");
-				list.add(new Todo(id,title,importance));
+				int id = rs.getInt("id");
+				String title = rs.getString("title");
+				int importance = rs.getInt("importance");
+				list.add(new Todo(id, title, importance));
 			}
 		} catch (NamingException | SQLException e) {
 			e.printStackTrace();
@@ -68,10 +61,11 @@ public class TodoDAO {
 		}
 		return list;
 	}
-	public void insertOne(Todo todo) {
+
+	public void insert(Todo todo) {
 		try {
 			this.connect();
-			ps=db.prepareStatement("INSERT INTO todos(title,importance) VALUES(?,?)");
+			ps = db.prepareStatement("INSERT INTO todos(title, importance) VALUES(?,?)");
 			ps.setString(1, todo.getTitle());
 			ps.setInt(2, todo.getImportance());
 			ps.executeUpdate();
@@ -81,17 +75,18 @@ public class TodoDAO {
 			this.disconnect();
 		}
 	}
-	public Todo findOne(int id) {
-		Todo todo=null;
+
+	public Todo findById(int id) {
+		Todo todo = null;
 		try {
 			this.connect();
-			ps=db.prepareStatement("SELECT * FROM todos WHERE id=?");
+			ps = db.prepareStatement("SELECT title, importance FROM todos WHERE id=?");
 			ps.setInt(1, id);
-			rs=ps.executeQuery();
+			rs = ps.executeQuery();
 			if(rs.next()) {
-				String title=rs.getString("title");
-				int importance=rs.getInt("importance");
-				todo=new Todo(id,title,importance);
+				String title = rs.getString("title");
+				int importance = rs.getInt("importance");
+				todo = new Todo(id, title, importance);
 			}
 		} catch (NamingException | SQLException e) {
 			e.printStackTrace();
@@ -100,10 +95,11 @@ public class TodoDAO {
 		}
 		return todo;
 	}
-	public void updateOne(Todo todo) {
+
+	public void update(Todo todo) {
 		try {
 			this.connect();
-			ps=db.prepareStatement("UPDATE todos SET title=?,importance=? WHERE id=?");
+			ps = db.prepareStatement("UPDATE todos SET title = ?,importance = ? WHERE id = ?");
 			ps.setString(1, todo.getTitle());
 			ps.setInt(2, todo.getImportance());
 			ps.setInt(3, todo.getId());
@@ -114,10 +110,11 @@ public class TodoDAO {
 			this.disconnect();
 		}
 	}
-	public void deleteOne(int id) {
+
+	public void delete(int id) {
 		try {
 			this.connect();
-			ps=db.prepareStatement("DELETE FROM todos WHERE id=?");
+			ps = db.prepareStatement("DELETE FROM todos WHERE id = ?");
 			ps.setInt(1, id);
 			ps.executeUpdate();
 		} catch (NamingException | SQLException e) {

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="todoapp.model.Todo,java.util.*"%>
+    pageEncoding="UTF-8" import="todoapp.model.todo.Todo,java.util.*"%>
  <%
  List<Todo> list=(List<Todo>)request.getAttribute("list");
  %>
@@ -24,6 +24,7 @@
 	<table class="table table-striped table-bordered"">
 		<thead>
 	      <tr>
+	        <th>ID</th>
 	        <th>タイトル</th>
 	        <th>重要度</th>
 	        <th>操作</th>
@@ -32,7 +33,8 @@
 		<tbody>
 		<%for(Todo t:list){ %>
 			<tr>
-				<td scope="row"><%=t.getTitle() %></td>
+				<th scope="row"><%=t.getId() %></th>
+				<td><%=t.getTitle() %></td>
 				<td><%=t.getStar() %></td>
 				<td>
 					<a href="/todoapp/Update?id=<%=t.getId()%>">

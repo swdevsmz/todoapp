@@ -1,4 +1,4 @@
-package todoapp.controller.todo;
+package todoapp.controller;
 
 import java.io.IOException;
 

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import todoapp.dao.TodoDAO;
-import todoapp.model.Todo;
+import todoapp.dao.todo.TodoDAO;
+import todoapp.model.todo.Todo;
 
 /**
  * Servlet implementation class Update
@@ -31,12 +31,12 @@ public class UpdateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String s_id=request.getParameter("id");
+		String s_id = request.getParameter("id");
 		if(s_id == null) {
 			response.sendRedirect("/todoapp/Read");
 		}else {
-			TodoDAO dao=new TodoDAO();
-			Todo todo =dao.findOne(Integer.parseInt(s_id));
+			TodoDAO dao = new TodoDAO();
+			Todo todo = dao.findById(Integer.parseInt(s_id));
 			request.setAttribute("todo", todo);
 			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/update.jsp");
 			rd.forward(request, response);
@@ -48,12 +48,12 @@ public class UpdateController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String title=request.getParameter("title");
-		String importance=request.getParameter("importance");
+		String title = request.getParameter("title");
+		String importance = request.getParameter("importance");
 		String id=request.getParameter("id");
-		Todo todo=new Todo(Integer.parseInt(id),title,Integer.parseInt(importance));
-		TodoDAO dao=new TodoDAO();
-		dao.updateOne(todo);
+		Todo todo = new Todo(Integer.parseInt(id),title,Integer.parseInt(importance));
+		TodoDAO dao = new TodoDAO();
+		dao.update(todo);
 
 		response.sendRedirect("/todoapp/Read");
 
