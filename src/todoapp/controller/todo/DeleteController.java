@@ -10,33 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import todoapp.dao.todo.TodoDAO;
 
-/**
- * Servlet implementation class Delete
- */
 @WebServlet("/Delete")
 public class DeleteController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public DeleteController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String s_id = request.getParameter("id");
-		if(s_id != null) {
-			TodoDAO dao = new TodoDAO();
-			dao.delete(Integer.parseInt(s_id));
-		}
-		response.sendRedirect("/todoapp/Read");
-	}
-
-
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String s_id = request.getParameter("id");
+        if(s_id != null) {
+            TodoDAO dao = new TodoDAO();
+            dao.delete(Integer.parseInt(s_id));
+        }
+        response.sendRedirect("/todoapp/Read");
+    }
 }

@@ -5,52 +5,52 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Todo implements Serializable{
-	private int id;
-	private String title;
-	private int importance;
-	public Todo() {}
+    private int id;
+    private String title;
+    private int importance;
+    private final String STAR = "★";
 
-	public Todo(String title,int importance) {
-		this.title=title;
-		this.importance=importance;
-	}
+    public Todo() {
+    }
 
-	public Todo(int id, String title, int importance) {
-		this(title,importance);
-		this.id = id;
-	}
+    public Todo(String title, int importance) {
+        this.title=title;
+        this.importance=importance;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public Todo(int id, String title, int importance) {
+        this(title,importance);
+        this.id = id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public int getImportance() {
-		return importance;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setImportance(int importance) {
-		this.importance = importance;
-	}
+    public int getImportance() {
+        return importance;
+    }
 
-	public String getStar() {
-		return IntStream.rangeClosed(1, this.importance).mapToObj(i -> "★").collect(Collectors.joining());
-//		String stars="";
-//		for(int i=0;i<this.importance;i++) {
-//			stars+="★";
-//		}
-//		return stars;
-	}
+    public void setImportance(int importance) {
+        this.importance = importance;
+    }
+
+    public String getStar() {
+        return IntStream.rangeClosed(1, this.importance)
+                    .mapToObj(i -> STAR)
+                    .collect(Collectors.joining());
+    }
 
 }
