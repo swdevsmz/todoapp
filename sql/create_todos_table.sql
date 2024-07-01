@@ -1,5 +1,0 @@
-CREATE TABLE todos(
- id INTEGER PRIMARY KEY AUTOINCREMENT,
- title VARCHAR(30),
- importance INTEGER
- );
