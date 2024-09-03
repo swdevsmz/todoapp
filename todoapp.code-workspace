@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "front-app"
+		},
+		{
+			"path": "terraform"
+		},
+		{
+			"path": "back-app"
+		},
+		{
+			"path": "e2e"
+		}
+	],
+	"settings": {}
+}
