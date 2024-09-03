@@ -16,5 +16,7 @@
 			"path": "e2e"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic"
+	}
 }
