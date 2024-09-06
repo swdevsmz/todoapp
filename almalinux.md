@@ -1,32 +1,84 @@
-# AlmaLinux
+# AlmaLinuxOS9.4
+
+## VMセットアップ
+
 
 * [ここ](https://almalinux.org/ja/get-almalinux/) からMinimal ISOをダウンロード
 
-* セットアップ手順
+* rootパスワードの設定、SSH許可
 
+* ネットワーク・ホスト名の設定
+
+* インストール先はデフォルト設定
+
+* ソフトウェアの選択は追加せずデフォルトのまま
+
+
+## OSセットアップ
+
+* インストール済みパッケージの更新
+```
 sudo yum update
+```
+* システム全体のアップグレード
+```
 sudo yum upgrade
+```
 
+* Dockerリポジトリ追加のためyum-utilsを追加
+```
 sudo yum install -y yum-utils
-
+```
+* Dockerリポジトリの追加
+```
 sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
+```
+* Dockerリポジトリの追加を確認
+```
+sudo yum repolist | grep docker
+```
 
-yum repolist | grep docker
+* Docker関連ツールのインストール
+```
+sudo yum install \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-compose-plugin
+```
 
-ls /etc/yum.repos.d/docker-ce.repo 
-
-sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
+* Dockerサービスの起動
+```
 sudo systemctl start docker
-
+```
+* Dockerサービスの自動起動
+```
 sudo systemctl enable docker
+```
+* docker-compose.ymlのサンプル
+```
+version: '3'
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+  redis:
+    image: redis:alpine
+```
 
+* 監視ツールのsysstatをインストール
+```
 sudo yum install sysstat
+```
 
-sudo vi /etc/cron.d/sysstat # configの修正
-
+* sysstat用の設定を作成
+```
+sudo vi /etc/cron.d/sysstat
+```
 ```
 # Run system activity accounting tool every 10 minutes
 */10 * * * * root /usr/lib64/sa/sa1 1 1
@@ -34,15 +86,18 @@ sudo vi /etc/cron.d/sysstat # configの修正
 # Generate a daily summary of process accounting at 23:53
 53 23 * * * root /usr/lib64/sa/sa2 -A
 ```
+* sysstatサービスの実行
+```
+sudo systemctl start sysstat 
+```
+* sysstatの自動起動
+```
+sudo systemctl enable sysstat 
+```
 
 
 
-sudo systemctl start sysstat.service 
-sudo systemctl enable sysstat.service 
 
-
-
-AlmaLinuxOS9.4
 
 
 ### そのたメモ
