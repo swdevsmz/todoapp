@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component , ChangeDetectorRef} from '@angular/core';
 import { TodoApiService, Todo } from '../../services/todo-api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, FormBuilder,FormGroup ,ReactiveFormsModule  } from '@angular/forms';
@@ -19,21 +19,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   ],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.scss',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoListComponent {
   todos: Todo[] = [];
   todoForm: FormGroup;
   constructor(
     private todoApiService: TodoApiService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private changeDetector: ChangeDetectorRef
   ) {
     this.todoForm = this.formBuilder.group({
       summary: ''
     });
   }
-
-
 
   ngOnInit(): void {
     this.findAll();
@@ -48,6 +47,7 @@ export class TodoListComponent {
       this.todos = data;
       console.log(this.todos);
     });
+    this.changeDetector.detectChanges();
   }
 
   update(todo: Todo, checked: boolean): void {
