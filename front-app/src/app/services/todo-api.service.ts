@@ -12,7 +12,7 @@ export interface Todo{
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class TodoApiService {
 
   private apiUrl = 'http://localhost:8080/api/todos';
 

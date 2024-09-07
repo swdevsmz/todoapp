@@ -1,0 +1,8 @@
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let todo of todos">
+    {{ todo.id }} : 
+    {{ todo.summary }} : 
+    <!-- {{ todo.done ? "done" : "Not done" }} -->
+    <mat-checkbox [checked]="todo.done"></mat-checkbox>
+  </li>
+</ul>
