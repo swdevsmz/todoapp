@@ -1,8 +1,19 @@
+<form  [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Favorite food</mat-label>
+    <input matInput placeholder="Ex. exercise" id="summary" formControlName="summary">
+  </mat-form-field>
+  <button mat-button type="submit">new</button>
+</form>
+
 <ul class="list-group">
   <li class="list-group-item" *ngFor="let todo of todos">
-    {{ todo.id }} : 
-    {{ todo.summary }} : 
+    {{ todo.id }} : {{ todo.summary }} :
     <!-- {{ todo.done ? "done" : "Not done" }} -->
-    <mat-checkbox [checked]="todo.done"></mat-checkbox>
+    <mat-checkbox
+      [checked]="todo.done"
+      (change)="update(todo, $event.checked)"
+    ></mat-checkbox>
+    <button mat-button (click)="delete(todo)">delete</button>
   </li>
 </ul>

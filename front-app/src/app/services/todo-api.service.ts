@@ -21,4 +21,16 @@ export class TodoApiService {
   getTodos(): Observable<Todo[]> {
     return this.http.get<Todo[]>(this.apiUrl);
   }
+
+  update(todo:Todo): Observable<Todo> {
+    return this.http.put<Todo>(this.apiUrl, todo);
+  }
+
+  delete(todo:Todo): Observable<Todo> {
+    return this.http.request<Todo>('delete',this.apiUrl, {body:todo});
+  }
+
+  create(todo:Todo): Observable<Todo> {
+    return this.http.post<Todo>(this.apiUrl, todo);
+  }
 }
