@@ -16,21 +16,21 @@ import org.apache.ibatis.annotations.Update;
 public interface TodoMapper {
 
     @Select("SELECT id, summary, done, created_at FROM todo WHERE id = #{id}")
-    Optional<Todo> findById(String todoId);
+    Optional<Todo> findById(Long id);
 
     @Select("SELECT id, summary, done, created_at FROM todo")
     List<Todo> findAll();
 
     @Insert("INSERT INTO todo (summary, done, created_at) VALUES (#{summary}, #{done}, #{createdAt})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void create(Todo todo);
+    boolean create(Todo todo);
 
-    @Update("UPDATE todo SET summary = #{summary}, done = #{done}, created_at = #{createdAt} WHERE todo_id = #{id}")
-    boolean updateById(Todo todo);
+    @Update("UPDATE todo SET summary = #{summary}, done = #{done}, created_at = #{createdAt} WHERE id = #{id}")
+    boolean update(Todo todo);
 
-    @Delete("DELETE FROM todo WHERE todo_id = #{id}")
-    void deleteById(Todo todo);
+    @Delete("DELETE FROM todo WHERE id = #{id}")
+    boolean delete(Todo todo);
 
-    @Select("SELECT COUNT(*) FROM todo WHERE finished = #{done}")
-    long countByFinished(boolean done);
+    @Select("SELECT COUNT(*) FROM todo WHERE done = true")
+    Long countByDone();
 }

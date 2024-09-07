@@ -5,14 +5,9 @@ import java.util.List;
 
 import com.todoapp.backapp.business.TodoService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.todoapp.backapp.domain.Todo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
@@ -28,19 +23,22 @@ public class TodoController {
     }
 
     @PostMapping
-    public void post(final Todo todo) {
-        // TODO
+    public boolean post(@RequestBody final Todo todo) {
+        return todoService.create(todo);
     }
 
     @PutMapping
-    public void put(final Todo todo) {
-        // TODO
+    public boolean put(@RequestBody final Todo todo) {
+        return todoService.update(todo);
     }
 
     @DeleteMapping()
-    public void delete() {
-        // TODO
+    public boolean delete(@RequestBody final Todo todo) {
+        return todoService.delete(todo);
     }
 
-
+    @GetMapping(path = "/count")
+    public Long count() {
+        return todoService.countByDone();
+    }
 }
