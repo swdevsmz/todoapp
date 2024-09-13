@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Todo } from '../model/todo';
 
-export interface Todo{
-  id:number;
-  summary:string;
-  done:boolean;
-}
+
 
 
 @Injectable({
@@ -18,9 +15,10 @@ export class TodoApiService {
 
   constructor(private http: HttpClient) { }
 
-  getTodos(): Observable<Todo[]> {
+  findAll(): Observable<Todo[]> {
     return this.http.get<Todo[]>(this.apiUrl);
   }
+
 
   update(todo:Todo): Observable<Todo> {
     return this.http.put<Todo>(this.apiUrl, todo);
