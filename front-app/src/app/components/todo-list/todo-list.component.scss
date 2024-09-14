@@ -1,20 +1,19 @@
 .todo-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px;
-    border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
 }
 
 .todo-id,
 .todo-summary {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .form-check-input {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .btn {
-    margin-left: 5px;
+  margin-left: 5px;
 }
