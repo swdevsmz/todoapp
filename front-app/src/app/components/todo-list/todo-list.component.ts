@@ -1,15 +1,22 @@
-import { ChangeDetectionStrategy, Component , ChangeDetectorRef} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { TodoApiService } from '../../services/todo-api.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule, FormBuilder,FormGroup ,ReactiveFormsModule  } from '@angular/forms';
+import {
+  FormsModule,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Todo } from '../../model/todo';
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [CommonModule],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.scss',
   changeDetection: ChangeDetectionStrategy.Default,
@@ -19,13 +26,11 @@ export class TodoListComponent {
   constructor(
     private todoApiService: TodoApiService,
     private changeDetector: ChangeDetectorRef
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.findAll();
   }
-
 
   findAll(): void {
     this.todoApiService.findAll().subscribe((data) => {
@@ -34,8 +39,9 @@ export class TodoListComponent {
     });
   }
 
-  update(todo: Todo, checked: boolean): void {
-    todo.done = checked;
+  update(todo: Todo, e: any): void {
+    console.log(e.target.checked);
+    todo.done = e.target.checked;
     this.todoApiService.update(todo).subscribe((data) => {
       console.log(data);
       this.findAll();

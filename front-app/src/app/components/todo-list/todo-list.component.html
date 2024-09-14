@@ -1,12 +1,28 @@
-<label for="todoSummary">new todo</label>
-<input id="todoSummary" type="text" #todo />
-<button (click)="create(todo.value)">add</button>
+<div class="form-floating mb-3">
+  <input
+    id="todoSummary"
+    type="text"
+    #todo
+    class="form-control"
+    placeholder="work"
+  />
+  <label for="todoSummary">new todo</label>
+  <button (click)="create(todo.value)" class="btn btn-primary">add</button>
+</div>
 
 <ul class="list-group">
   <li class="list-group-item" *ngFor="let todo of todos">
-    <div *ngIf="todo">
-      {{ todo.id }} : {{ todo.summary }} :
-      <button (click)="delete(todo)">delete</button>
+    <div *ngIf="todo" class="todo-item">
+      <span class="todo-id">{{ todo.id }}</span>
+      <span class="todo-summary">{{ todo.summary }}</span>
+      <input
+        id="todoDone"
+        type="checkbox"
+        [checked]="todo.done"
+        (change)="update(todo, $event)"
+        class="form-check-input"
+      />
+      <button (click)="delete(todo)" class="btn btn-danger">delete</button>
     </div>
   </li>
 </ul>
