@@ -15,13 +15,15 @@
     <div *ngIf="todo" class="todo-item">
       <span class="todo-id">{{ todo.id }}</span>
       <span class="todo-summary">{{ todo.summary }}</span>
-      <input
-        id="todoDone"
-        type="checkbox"
-        [checked]="todo.done"
-        (change)="update(todo, $event)"
-        class="form-check-input"
-      />
+      <label>
+        <input
+          id="todoDone"
+          type="checkbox"
+          [checked]="todo.done"
+          (change)="update(todo, $event)"
+          class="form-check-input"
+        />done
+      </label>
       <button (click)="delete(todo)" class="btn btn-danger">delete</button>
     </div>
   </li>
