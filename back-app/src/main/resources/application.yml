@@ -2,21 +2,16 @@ spring:
     application:
         name: backapp
     datasource:
-#      url: jdbc:h2:./target/test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-      url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      url: jdbc:h2:./test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
       driver-class-name: org.h2.Driver
       username: sa
       password:
-      initialize: true
-      initialization-mode: always
-    sql:
-      init:
-        encoding: UTF-8
-        schema-locations: classpath:schema.sql
-        data-locations: classpath:data.sql
     h2:
       console:
         enabled: true
+
+flyway:
+  enable: true
 
 mybatis:
   configuration:
