@@ -1,9 +1,9 @@
 package com.todoapp.backapp.business;
 
-import com.todoapp.backapp.domain.Todo;
-
 import java.util.List;
 import java.util.Optional;
+
+import com.todoapp.backapp.persistance.entity.Todo;
 
 public interface TodoService {
 

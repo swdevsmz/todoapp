@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.todoapp.backapp.repository.mapper") //
+@MapperScan(basePackages = "com.todoapp.backapp.persistance.mapper") //
 public class BackappApplication {
 
 	public static void main(String[] args) {
