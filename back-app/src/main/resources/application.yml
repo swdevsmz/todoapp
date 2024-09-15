@@ -17,3 +17,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
+logging:
+  level:
+    root: DEBUG
+
