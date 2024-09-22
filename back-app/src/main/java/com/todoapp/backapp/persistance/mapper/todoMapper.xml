@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.todoapp.backapp.persistance.mapper.TodoMapper">
+
     <select id="findAll" resultType="com.todoapp.backapp.persistance.entity.Todo">
         SELECT id, summary, done, created_at FROM todo
     </select>
@@ -13,12 +14,16 @@
         INSERT INTO todo (summary, done, created_at) VALUES (#{summary}, #{done}, #{createdAt})
     </insert>
 
-    <!-- @Update("UPDATE todo SET summary = #{summary}, done = #{done}, created_at = #{createdAt} WHERE id = #{id}")
-    boolean update(Todo todo);
+    <update id="update">
+        UPDATE todo SET summary = #{summary}, done = #{done}, created_at = #{createdAt} WHERE id = #{id}
+    </update>
 
-    @Delete("DELETE FROM todo WHERE id = #{id}")
-    boolean delete(Todo todo);
+    <delete id="delete">
+        DELETE FROM todo WHERE id = #{id}
+    </delete>
 
-    @Select("SELECT COUNT(*) FROM todo WHERE done = true") -->
+    <select id="countByDone" resultType="Long">
+        SELECT COUNT(*) FROM todo WHERE done = true
+    </select>
 
 </mapper>
