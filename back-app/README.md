@@ -4,7 +4,7 @@
 
 ### swagger-ui
 
-[swagger-ui](http://localhost:8080/swagger-ui/index.htm)
+[swagger-ui](http://localhost:8080/swagger-ui/index.html)
 
 ### H2 console
 
