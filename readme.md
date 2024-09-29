@@ -1,2 +1,2 @@
 Copyright
-see ./LICENSE
+see [LICENSE](./LICENSE)
