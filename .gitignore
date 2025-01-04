@@ -1,1 +1,8 @@
 node_modules
+e2e
+terraform/.terraform
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
+ec2_key
+ec2_key.pub

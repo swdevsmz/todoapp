@@ -33,8 +33,8 @@ yum install -y httpd php8.1
 systemctl enable httpd.service
 systemctl start httpd
 cd /var/www/html
-wget  https://us-west-2-tcprod.s3.amazonaws.com/courses/ILT-TF-200-ARCHIT/v7.7.11.prod-feed4ba8/lab-2-VPC/scripts/instanceData.zip
-unzip instanceData.zip
+# wget  https://us-west-2-tcprod.s3.amazonaws.com/courses/ILT-TF-200-ARCHIT/v7.7.11.prod-feed4ba8/lab-2-VPC/scripts/instanceData.zip
+# unzip instanceData.zip
               EOF
   tags = {
     Name = var.name

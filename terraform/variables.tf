@@ -21,11 +21,11 @@ variable "subnets" {
         cidr = "10.1.11.0/24",
         az   = "ap-northeast-1c"
       },
-      private-1d = {
-        name = "private-1d",
-        cidr = "10.1.12.0/24",
-        az   = "ap-northeast-1d"
-      },
+      # private-1d = {
+      #   name = "private-1d",
+      #   cidr = "10.1.12.0/24",
+      #   az   = "ap-northeast-1d"
+      # },
     },
     public_subnets = {
       public-1a = {
@@ -38,11 +38,11 @@ variable "subnets" {
         cidr = "10.1.101.0/24"
         az   = "ap-northeast-1c"
       },
-      public-1d = {
-        name = "public-1d"
-        cidr = "10.1.102.0/24"
-        az   = "ap-northeast-1d"
-      }
+      # public-1d = {
+      #   name = "public-1d"
+      #   cidr = "10.1.102.0/24"
+      #   az   = "ap-northeast-1d"
+      # }
     }
   }
 }
